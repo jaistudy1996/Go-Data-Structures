@@ -24,6 +24,17 @@ func (p post) details() {
 	fmt.Println("Name of author: ", p.author.fullName())
 }
 
+type website struct {
+	posts []post
+}
+
+func (w website) contents() {
+	fmt.Println("Contents of website")
+	for _, v := range w.posts {
+		v.details()
+	}
+}
+
 func main() {
 	author1 := author{
 		firstName: "First",
@@ -31,10 +42,27 @@ func main() {
 		age: 21,
 	}
 
-	post := post{
+	post1 := post{
 		title: "Title",
 		content: "Content for title",
 		author: author1,
 	}
-	post.details()
+
+	post2 := post{
+		title: "Title for second post",
+		content: "Content for second post",
+		author: author1,
+	}
+
+	post3 := post{
+		title: "Title for third post",
+		content: "Content for third post",
+		author: author1,
+	}
+
+	website := website{
+		posts: []post{post1, post2, post3},
+	}
+	
+	website.contents()
 }
