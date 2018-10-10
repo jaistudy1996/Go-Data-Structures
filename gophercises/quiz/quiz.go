@@ -7,17 +7,21 @@ import (
 	"io"
 	"log"
 	"os"
+	"strings"
 )
 
 func main() {
 	quiz := readCSV("./problems.csv")
-	//correctAnswers := 0
+	correctAnswers := 0
 	for _, ques := range quiz {
 		consoleReader := bufio.NewReader(os.Stdin)
 		fmt.Print(ques[0], " ")
 		answer, _ := consoleReader.ReadString('\n')
-		fmt.Println(answer)
+		if strings.TrimRight(answer, "\n") == ques[1] {
+			correctAnswers++
+		}
 	}
+	fmt.Printf("Score: %d/%d", correctAnswers, len(quiz))
 }
 
 func checkError(e error) {
